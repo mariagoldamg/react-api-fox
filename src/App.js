@@ -1,25 +1,32 @@
-import logo from './logo.svg';
+import { Component } from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  constructor(){
+    super()
+    this.state = {
+      image:null
+    }
+  }
+
+ async componentDidMount () {
+    const url = "https://randomfox.ca/floof/";
+    const response = await fetch (url);
+    const data = await response.json();
+    this.setState ({image:data.image});
+ 
+
 }
 
+
+render(){
+  return(
+    <div>
+      <img src={this.state.image} alt="fox" width ="300px"/>
+    
+    </div>
+  )
+}
+}
 export default App;
